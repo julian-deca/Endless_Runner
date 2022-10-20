@@ -1,3 +1,4 @@
+import { Sitting } from "./playerStates";
 export default class Player {
   constructor(game) {
     this.game = game;
@@ -12,6 +13,9 @@ export default class Player {
     this.speed = 0;
     this.maxspeed = 10;
     this.weight = 1;
+    this.states = [new Sitting(this)];
+    this.currentState = this.states[0];
+    this.currentState.enter();
   }
   update(input) {
     this.x += this.speed;
