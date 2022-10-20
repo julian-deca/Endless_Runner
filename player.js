@@ -1,4 +1,4 @@
-import { Sitting } from "./playerStates";
+import { Sitting, Running } from "./playerStates";
 export default class Player {
   constructor(game) {
     this.game = game;
@@ -13,11 +13,12 @@ export default class Player {
     this.speed = 0;
     this.maxspeed = 10;
     this.weight = 1;
-    this.states = [new Sitting(this)];
+    this.states = [new Sitting(this), new Running(this)];
     this.currentState = this.states[0];
     this.currentState.enter();
   }
   update(input) {
+    this.currentState.handleInput;
     this.x += this.speed;
     if (input.includes("ArrowRight")) this.speed = this.maxspeed;
     else if (input.includes("ArrowLeft")) this.speed = -this.maxspeed;
@@ -47,5 +48,9 @@ export default class Player {
   }
   onGround() {
     return this.y >= this.game.height - this.height;
+  }
+  setState(state) {
+    this.currentState = this.states[0];
+    this.currentState.enter();
   }
 }
