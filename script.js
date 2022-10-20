@@ -11,11 +11,12 @@ window.addEventListener("load", () => {
     constructor(width, height) {
       this.width = width;
       this.height = height;
+      this.groundMargin = 50;
       this.player = new Player(this);
       this.input = new InputHandler();
     }
     update(deltatime) {
-      this.player.update(this.input.keys);
+      this.player.update(this.input.keys, deltatime);
     }
     draw(context) {
       this.player.draw(context);
@@ -25,7 +26,7 @@ window.addEventListener("load", () => {
   let lastTIme = 0;
   function animate(timeStamp) {
     const deltatime = timeStamp - lastTIme;
-    lastTIme = deltatime;
+    lastTIme = timeStamp;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.update(deltatime);
     game.draw(ctx);
