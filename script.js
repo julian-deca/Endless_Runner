@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
       this.width = width;
       this.height = height;
       this.groundMargin = 50;
+      this.speed = 3;
       this.player = new Player(this);
       this.input = new InputHandler();
     }
