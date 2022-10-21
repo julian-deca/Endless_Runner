@@ -12,13 +12,40 @@ class Layer {
     if (this.x < -this.width) this.x = 0;
     else this.x -= this.game.speed * this.speedModifier;
   }
-  draw() {
-    constext.drawImage(
+  draw(context) {
+    context.drawImage(this.image, this.x, this.y, this.width, this.height);
+    context.drawImage(
       this.image,
-      this.x,
+      this.x + this.width,
       this.y,
-      this.draw.width,
+      this.width,
       this.height
     );
+  }
+}
+export class Background {
+  constructor(game) {
+    this.game = game;
+    this.width = 1667;
+    this.height = 500;
+    this.layer5Image = layer5;
+    this.layer1 = new Layer(
+      this.game,
+      this.width,
+      this.height,
+      1,
+      this.layer5Image
+    );
+    this.backgroundLayers = [this.layer1];
+  }
+  update() {
+    this.backgroundLayers.forEach((layer) => {
+      layer.update();
+    });
+  }
+  draw(context) {
+    this.backgroundLayers.forEach((layer) => {
+      layer.draw(context);
+    });
   }
 }

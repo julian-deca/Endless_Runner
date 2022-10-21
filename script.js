@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import { InputHandler } from "./input.js";
+import { Background } from "./background.js";
 
 window.addEventListener("load", () => {
   const canvas = document.getElementById("canvas1");
@@ -11,15 +12,19 @@ window.addEventListener("load", () => {
     constructor(width, height) {
       this.width = width;
       this.height = height;
-      this.groundMargin = 50;
+      this.groundMargin = 80;
       this.speed = 3;
       this.player = new Player(this);
+      this.Background = new Background(this);
       this.input = new InputHandler();
     }
     update(deltatime) {
+      this.Background.update();
       this.player.update(this.input.keys, deltatime);
     }
     draw(context) {
+      this.Background.draw(context);
+
       this.player.draw(context);
     }
   }
