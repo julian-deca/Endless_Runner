@@ -18,10 +18,12 @@ window.addEventListener("load", () => {
       this.maxSpeed = 3;
       this.player = new Player(this);
       this.Background = new Background(this);
-      this.input = new InputHandler();
+      this.input = new InputHandler(this);
       this.enemies = [];
       this.enemyTimer = 0;
       this.enemyInterval = 1000;
+      this.debug = true;
+      this.score = 0;
     }
     update(deltatime) {
       this.Background.update();
