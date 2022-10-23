@@ -11,6 +11,14 @@
   transform: translate(-50%, -50%);
   max-width: 100%;
 }
-#player,#layer1,#layer2,#layer3,#layer4,#layer5 {
+#player,
+#layer1,
+#layer2,
+#layer3,
+#layer4,
+#layer5,
+#enemy_fly,
+#enemy_spider_big,
+#enemy_plant {
   display: none;
 }
