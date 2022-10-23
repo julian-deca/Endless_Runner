@@ -56,7 +56,6 @@ window.addEventListener("load", () => {
         this.enemies.push(new GroundEnemy(this));
       else if (this.speed > 0) this.enemies.push(new ClimbingEnemy(this));
       this.enemies.push(new FlyfingEnemy(this));
-      console.log(this.enemies);
     }
   }
   const game = new Game(canvas.width, canvas.height);
