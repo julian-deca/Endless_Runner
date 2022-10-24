@@ -22,11 +22,14 @@ window.addEventListener("load", () => {
       this.input = new InputHandler(this);
       this.UI = new UI(this);
       this.enemies = [];
+      this.particles = [];
       this.enemyTimer = 0;
       this.enemyInterval = 1000;
       this.debug = true;
       this.score = 0;
       this.fontColor = "black";
+      this.player.currentState = this.player.states[0];
+      this.player.currentState.enter();
     }
     update(deltatime) {
       this.Background.update();
@@ -42,6 +45,11 @@ window.addEventListener("load", () => {
         enemy.update(deltatime);
       });
       this.enemies = this.enemies.filter((enemy) => !enemy.markedForDeletion);
+
+      this.particles.forEach((particle, index) => {
+        particle.update();
+        if (particle.markedForDeletion) this.particles.splice(index, 1);
+      });
     }
     draw(context) {
       this.Background.draw(context);
@@ -50,6 +58,9 @@ window.addEventListener("load", () => {
         enemy.draw(context);
       });
       this.UI.draw(context);
+      this.particles.forEach((particle, index) => {
+        particle.draw(context);
+      });
     }
     addEnemy() {
       if (this.speed > 0 && Math.random() < 0.5)
