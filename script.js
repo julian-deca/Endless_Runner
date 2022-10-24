@@ -30,6 +30,7 @@ window.addEventListener("load", () => {
       this.fontColor = "black";
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
+      this.maxParticles = 50;
     }
     update(deltatime) {
       this.Background.update();
@@ -50,6 +51,9 @@ window.addEventListener("load", () => {
         particle.update();
         if (particle.markedForDeletion) this.particles.splice(index, 1);
       });
+      if (this.particles.length > this.maxParticles) {
+        this.particles = this.particles.slice(0, 50);
+      }
     }
     draw(context) {
       this.Background.draw(context);
