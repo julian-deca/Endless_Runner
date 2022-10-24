@@ -16,6 +16,7 @@ window.addEventListener("load", () => {
       this.height = height;
       this.groundMargin = 80;
       this.speed = 0;
+      this.gameOver = false;
       this.maxSpeed = 3;
       this.player = new Player(this);
       this.Background = new Background(this);
@@ -29,11 +30,15 @@ window.addEventListener("load", () => {
       this.debug = false;
       this.score = 0;
       this.fontColor = "black";
+      this.time = 0;
+      this.maxTime = 20000;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
       this.maxParticles = 50;
     }
     update(deltatime) {
+      this.time += deltatime;
+      if (this.time > this.maxTime) this.gameOver = true;
       this.Background.update();
       this.player.update(this.input.keys, deltatime);
 
@@ -90,7 +95,7 @@ window.addEventListener("load", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     game.update(deltatime);
     game.draw(ctx);
-    requestAnimationFrame(animate);
+    if (!game.gameOver) requestAnimationFrame(animate);
   }
   animate(0);
 });
