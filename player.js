@@ -40,8 +40,13 @@ export default class Player {
     this.checkCollisions();
     this.currentState.handleInput(input);
     this.x += this.speed;
-    if (input.includes("ArrowRight")) this.speed = this.maxspeed;
-    else if (input.includes("ArrowLeft")) this.speed = -this.maxspeed;
+    if (input.includes("ArrowRight") && this.currentState !== this.states[6])
+      this.speed = this.maxspeed;
+    else if (
+      input.includes("ArrowLeft") &&
+      this.currentState !== this.states[6]
+    )
+      this.speed = -this.maxspeed;
     else this.speed = 0;
     if (this.x < 0) this.x = 0;
     if (this.x > this.game.width - this.width)
@@ -109,6 +114,7 @@ export default class Player {
           this.game.score++;
         else {
           this.setState(6, 0);
+          this.game.lives--;
         }
       }
     });

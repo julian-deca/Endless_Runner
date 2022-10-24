@@ -14,6 +14,7 @@ window.addEventListener("load", () => {
     constructor(width, height) {
       this.width = width;
       this.height = height;
+      this.lives = 3;
       this.groundMargin = 80;
       this.speed = 0;
       this.gameOver = false;
@@ -28,17 +29,18 @@ window.addEventListener("load", () => {
       this.enemyTimer = 0;
       this.enemyInterval = 1000;
       this.debug = false;
+      this.maxScore = 45;
       this.score = 0;
       this.fontColor = "black";
       this.time = 0;
-      this.maxTime = 20000;
+      this.maxTime = 35000;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
       this.maxParticles = 50;
     }
     update(deltatime) {
       this.time += deltatime;
-      if (this.time > this.maxTime) this.gameOver = true;
+      if (this.time > this.maxTime || this.lives <= 0) this.gameOver = true;
       this.Background.update();
       this.player.update(this.input.keys, deltatime);
 
@@ -58,7 +60,7 @@ window.addEventListener("load", () => {
         if (particle.markedForDeletion) this.particles.splice(index, 1);
       });
       if (this.particles.length > this.maxParticles) {
-        this.particles = this.particles.slice(0, 50);
+        this.particles.length = this.maxParticles;
       }
 
       this.collisions.forEach((collision, index) => {
