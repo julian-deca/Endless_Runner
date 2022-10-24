@@ -121,7 +121,7 @@ export class Rolling extends State {
       new Fire(
         this.game,
         this.game.player.x + this.game.player.width * 0.5,
-        this.game.player.y + this.game.player.height * 0.5
+        this.game.player.y + this.game.player.height
       )
     );
     if (!input.includes(" ") && this.game.player.onGround()) {
